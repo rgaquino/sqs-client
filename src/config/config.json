@@ -1,0 +1,6 @@
+{
+  "accessKeyId": "ACCESS_KEY",
+  "secretAccessKey": "SECRET_KEY",
+  "region": "eu-west-2",
+  "endpoint": "http://127.0.0.1:9324"
+}
