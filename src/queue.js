@@ -28,7 +28,6 @@ module.exports = function queue() {
         res.body = 'Created queue baby!';
       }
       log.info(res.body);
-      return res;
     });
   });
 
