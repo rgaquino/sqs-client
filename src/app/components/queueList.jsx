@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import log from 'electron-log/electron-log';
+import log from 'electron-log';
 
 class QueueList extends Component {
   constructor(props) {
