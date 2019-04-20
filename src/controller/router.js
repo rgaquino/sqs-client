@@ -135,5 +135,26 @@ router.delete('/message', (req, res) => {
   });
 });
 
+// @route   GET /message
+// @desc    Retrieves a message from a queue
+// @access  Public
+router.get('/message', (req, res) => {
+  const params = {
+    QueueUrl: req.body.queue,
+  };
+
+  log.info(`Retrieving message from ${req.body.queue}`);
+  sqs.receiveMessage(params, (err, data) => {
+    if (err) {
+      log.error(`Failed to retrieve message from ${req.body.queue}`);
+      res.status(500)
+        .json(err);
+    } else {
+      res.status(201)
+        .json(data);
+    }
+  });
+});
+
 
 export default router;
