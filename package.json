@@ -3,7 +3,7 @@
   "productName": "sqs-client",
   "version": "1.0.0",
   "description": "SQS Client",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.437.0",
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "electron-compile": "^6.4.4",
     "electron-devtools-installer": "^2.1.0",

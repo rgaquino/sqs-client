@@ -1,27 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>SQS Client</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body style="overflow: hidden; background-color: rgba(0,0,0,0); margin: 0">
-    <div id="App"></div>
+<body>
+    <div id="app"></div>
+    <script src="./renderer.jsx"></script>
 </body>
-
-
-<script type="text/jsx">
-  import React from 'react';
-  import ReactDOM from 'react-dom';
-  import { AppContainer } from 'react-hot-loader';
-
-  const render = () => {
-    const App = require('./app').default;
-    ReactDOM.render(<AppContainer><App/></AppContainer>, document.getElementById('App'));
-  };
-
-  render();
-  if (module.hot) {
-    module.hot.accept(render);
-  }
-</script>
 </html>
