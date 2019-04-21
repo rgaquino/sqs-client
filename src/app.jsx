@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
 import QueueList from './app/components/queueList';
+import store from './store';
 
 class App extends Component {
   render() {
     return (
-      <QueueList />
+      <Provider store={store}>
+        <QueueList />
+      </Provider>
     );
   }
 }

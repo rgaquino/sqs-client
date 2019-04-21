@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import sampleReducer from './sampleReducer';
+import queueReducer from './queueReducer';
+import errorReducer from './errorReducer';
 
 export default combineReducers({
-  sample: sampleReducer,
+  error: errorReducer,
+  queue: queueReducer,
 });

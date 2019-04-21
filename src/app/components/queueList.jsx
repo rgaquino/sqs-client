@@ -1,40 +1,33 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import log from 'electron-log';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import QueueListItem from './queueListItem';
+import { getQueues } from '../actions/queueActions';
 
 class QueueList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      queues: [],
-    };
-  }
-
   componentDidMount() {
-    axios.get('http://localhost:5010/queues')
-      .then((res) => {
-        this.setState({
-          queues: res.data.queues,
-        });
-      })
-      .catch((err) => {
-        log.error(err);
-      });
+    this.props.getQueues();
   }
 
   render() {
+    const { queues } = this.props.queue;
+
     return (
       <ul className="list-group">
-        {this.state.queues.map(queue =>
-          (<li
-            key={queue}
-            className="list-group-item d-flex justify-content-between align-items-center"
-          >{queue}
-            <span className="badge badge-primary badge-pill">14</span>
-          </li>))}
+        {queues.map(q => <QueueListItem key={q} queue={q} />)}
       </ul>
     );
   }
 }
 
-export default QueueList;
+QueueList.propTypes = {
+  getQueues: PropTypes.func.isRequired,
+  queue: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+  queue: state.queue,
+});
+
+export default connect(mapStateToProps, { getQueues })(QueueList);
