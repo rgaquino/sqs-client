@@ -1,7 +1,7 @@
 import axios from 'axios';
 import log from 'electron-log';
 
-import { GET_QUEUES, DELETE_QUEUE } from './types';
+import { GET_QUEUES } from './types';
 
 export const getQueues = () => (dispatch) => {
   axios.get('http://localhost:5010/queues')
@@ -12,7 +12,7 @@ export const getQueues = () => (dispatch) => {
       });
     })
     .catch((err) => {
-      log.info(err);
+      log.error(err);
       dispatch({
         type: GET_QUEUES,
         payload: {},
@@ -20,13 +20,11 @@ export const getQueues = () => (dispatch) => {
     });
 };
 
-export const deleteQueue = () => (dispatch) => {
-  axios.delete('http://localhost:5010/queue')
-    .then(res => dispatch({
-      type: DELETE_QUEUE,
-      payload: res.data.queues,
-    }))
-    .catch((err) => {
-      log.error(err);
-    });
+export const createQueue = (queue, history) => () => {
+  axios.post('http://localhost:5010/queue', queue)
+    .then(() => {
+      getQueues();
+      history.push('/');
+    })
+    .catch(err => log.error(err));
 };

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import QueueListItem from './queueListItem';
-import { getQueues } from '../actions/queueActions';
+import { getQueues } from '../../actions/queueActions';
 
 class QueueList extends Component {
   componentDidMount() {
@@ -14,9 +15,12 @@ class QueueList extends Component {
     const { queues } = this.props.queue;
 
     return (
-      <ul className="list-group">
-        {queues.map(q => <QueueListItem key={q} queue={q} />)}
-      </ul>
+      <div>
+        <ul className="list-group">
+          {queues.map(q => <QueueListItem key={q} queue={q} />)}
+        </ul>
+        <Link to="/create">Create queue</Link>
+      </div>
     );
   }
 }
