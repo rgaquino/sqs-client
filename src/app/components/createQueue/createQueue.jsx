@@ -22,19 +22,13 @@ class CreateQueue extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
-    const queue = {
-      name: this.state.name,
-    };
-
-    this.props.createQueue(queue, this.props.history);
+    this.props.createQueue(this.state.name, this.props.history);
   }
 
   render() {
     return (
       <div>
         <form onSubmit={this.onSubmit}>
-          <label htmlFor="name" defaultValue="Queue Name" />
           <input onChange={this.onChange} name="name" placeholder="Queue Name" />
           <input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
         </form>
