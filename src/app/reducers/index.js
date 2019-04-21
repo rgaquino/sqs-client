@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux';
-import sampleReducer from './sampleReducer';
+import { connectRouter } from 'connected-react-router';
+import queueReducer from './queueReducer';
+import errorReducer from './errorReducer';
 
-export default combineReducers({
-  sample: sampleReducer,
-});
+export default function createRootReducer(history) {
+  return combineReducers({
+    router: connectRouter(history),
+    error: errorReducer,
+    queue: queueReducer,
+  });
+}
