@@ -66,8 +66,9 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
-const expressApp = express();
-expressApp.use(bodyParser.json());
-expressApp.use(bodyParser.urlencoded({ extended: true }));
-expressApp.use(router);
-expressApp.listen(5010);
+// API
+const api = express();
+api.use(bodyParser.json());
+api.use(bodyParser.urlencoded({ extended: true }));
+api.use(router);
+api.listen(5010);

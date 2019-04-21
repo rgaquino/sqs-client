@@ -23,7 +23,9 @@ class QueueList extends Component {
 
 QueueList.propTypes = {
   getQueues: PropTypes.func.isRequired,
-  queue: PropTypes.object.isRequired,
+  queue: PropTypes.shape({
+    queues: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 };
 
 const mapStateToProps = state => ({
