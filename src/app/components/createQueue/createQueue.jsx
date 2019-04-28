@@ -28,11 +28,22 @@ class CreateQueue extends Component {
   render() {
     return (
       <Fragment>
-        <form onSubmit={this.onSubmit}>
-          <input onChange={this.onChange} name="name" placeholder="Queue Name" />
-          <input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
-        </form>
-        <Link to="/">Back</Link>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <form onSubmit={this.onSubmit}>
+                <input
+                  className="form-control"
+                  name="name"
+                  placeholder="Queue Name"
+                  onChange={this.onChange}
+                />
+                <input type="submit" value="Submit" className="btn btn-primary btn-block" />
+                <Link to="/" className="btn btn-secondary btn-block">Back</Link>
+              </form>
+            </div>
+          </div>
+        </div>
       </Fragment>
     );
   }

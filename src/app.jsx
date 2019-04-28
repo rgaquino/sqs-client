@@ -3,9 +3,9 @@ import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 
-import QueueList from './app/components/queueList/queueList';
-import CreateQueue from './app/components/createQueue/createQueue';
-import QueueInfo from './app/components/queueInfo/queueInfo';
+import QueueList from './app/components/queueList';
+import CreateQueue from './app/components/createQueue';
+import QueueInfo from './app/components/queueInfo';
 
 import { configureStore, history } from './store';
 

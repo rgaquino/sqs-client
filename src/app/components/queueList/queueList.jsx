@@ -16,10 +16,13 @@ class QueueList extends Component {
 
     return (
       <Fragment>
-        <ul className="list-group">
-          {queues.map(q => <QueueListItem key={q} queue={q} />)}
-        </ul>
-        <Link to="/create">Create queue</Link>
+        <div className="container-fluid">
+          <input className="form-control" type="text" placeholder="Search..." />
+          <ul className="list-group">
+            {queues.map(q => <QueueListItem key={q} queue={q} />)}
+          </ul>
+          <Link to="/create" className="btn btn-primary btn-block mt-4">Create queue</Link>
+        </div>
       </Fragment>
     );
   }

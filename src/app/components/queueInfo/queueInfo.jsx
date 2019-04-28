@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { deleteQueue } from '../../actions/queueActions';
-import SendMessage from '../sendMessage/sendMessage';
+import { clearMessages } from '../../actions/messageActions';
+import SendMessage from './sendMessage';
 
 
 class QueueInfo extends Component {
@@ -14,19 +15,30 @@ class QueueInfo extends Component {
       queue: props.match.params.name,
     };
     this.deleteQueue = this.deleteQueue.bind(this);
+    this.clearMessages = this.clearMessages.bind(this);
   }
 
   deleteQueue() {
     this.props.deleteQueue(this.state.queue, this.props.history);
   }
 
+  clearMessages() {
+    this.props.clearMessages(this.state.queue);
+  }
+
   render() {
     return (
       <Fragment>
-        <h2>{this.state.queue}</h2>
-        <button className="btn" onClick={this.deleteQueue}>Delete</button>
-        <Link to="/" className="btn">Back</Link>
-        <SendMessage queue={this.state.queue} />
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-12">
+              <Link to="/" className="btn"><h2>{this.state.queue}</h2></Link>
+              <button className="btn btn-danger" onClick={this.deleteQueue}>Delete</button>
+              <button className="btn btn-warning" onClick={this.clearMessages}>Purge</button>
+              <SendMessage queue={this.state.queue} />
+            </div>
+          </div>
+        </div>
       </Fragment>
     );
   }
@@ -39,6 +51,7 @@ QueueInfo.propTypes = {
     }),
   }).isRequired,
   deleteQueue: PropTypes.func.isRequired,
+  clearMessages: PropTypes.func.isRequired,
 };
 
-export default connect(null, { deleteQueue })(QueueInfo);
+export default connect(null, { deleteQueue, clearMessages })(QueueInfo);

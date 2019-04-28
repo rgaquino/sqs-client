@@ -1,13 +1,12 @@
 import axios from 'axios';
 import log from 'electron-log';
-import { GET_QUEUES } from './types';
 
 // TODO: This shouldn't be hardcoded.
 function getUrl(name) {
   return `http://127.0.0.1:9324/queue/${name}`;
 }
 
-export const sendMessage = (queue, message) => (dispatch) => {
+export const sendMessage = (queue, message) => () => {
   const payload = {
     queue: getUrl(queue),
     message,
@@ -17,11 +16,14 @@ export const sendMessage = (queue, message) => (dispatch) => {
     .then(() => {
       log.info('Message sent to queue');
     })
-    .catch((err) => {
-      log.error(err);
-      dispatch({
-        type: GET_QUEUES,
-        payload: {},
-      });
-    });
+    .catch(err => log.error(err));
+};
+
+export const clearMessages = queue => () => {
+  const payload = { queue: getUrl(queue) };
+  axios.delete('http://localhost:5010/messages', { data: payload })
+    .then(() => {
+      log.info('Messages in queue purged');
+    })
+    .catch(err => log.error(err));
 };

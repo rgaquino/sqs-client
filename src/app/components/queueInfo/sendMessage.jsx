@@ -30,7 +30,7 @@ class SendMessage extends Component {
           <div className="form-group">
             <label htmlFor="message">Message</label>
             <textarea className="form-control" name="message" rows="3" onChange={this.onChange} />
-            <input type="submit" value="Send Message" className="btn btn-info btn-block mt-4" />
+            <input type="submit" value="Send Message" className="btn btn-primary btn-block mt-4" />
           </div>
         </form>
       </Fragment>
