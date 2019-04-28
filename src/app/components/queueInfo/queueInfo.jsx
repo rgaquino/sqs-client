@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { deleteQueue } from '../../actions/queueActions';
+import SendMessage from '../sendMessage/sendMessage';
+
 
 class QueueInfo extends Component {
   constructor(props) {
@@ -20,11 +22,12 @@ class QueueInfo extends Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <h2>{this.state.queue}</h2>
         <button className="btn" onClick={this.deleteQueue}>Delete</button>
         <Link to="/" className="btn">Back</Link>
-      </div>
+        <SendMessage queue={this.state.queue} />
+      </Fragment>
     );
   }
 }
@@ -32,7 +35,7 @@ class QueueInfo extends Component {
 QueueInfo.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      name: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
     }),
   }).isRequired,
   deleteQueue: PropTypes.func.isRequired,

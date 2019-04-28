@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -27,13 +27,13 @@ class CreateQueue extends Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         <form onSubmit={this.onSubmit}>
           <input onChange={this.onChange} name="name" placeholder="Queue Name" />
           <input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
         </form>
         <Link to="/">Back</Link>
-      </div>
+      </Fragment>
     );
   }
 }

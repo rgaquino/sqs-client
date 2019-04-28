@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -15,12 +15,12 @@ class QueueList extends Component {
     const { queues } = this.props.queue;
 
     return (
-      <div>
+      <Fragment>
         <ul className="list-group">
           {queues.map(q => <QueueListItem key={q} queue={q} />)}
         </ul>
         <Link to="/create">Create queue</Link>
-      </div>
+      </Fragment>
     );
   }
 }
