@@ -12,7 +12,8 @@ class MessageDetails extends Component {
   }
 
   deleteMessage() {
-    log.info('Message deleted!');
+    log.info(`deleting ${this.props.id} from queue=${this.props.queue.queue}`);
+    // this.props.deleteMessage(this.props.queue.queue, this.props.id);
   }
 
   render() {
@@ -38,6 +39,14 @@ MessageDetails.propTypes = {
   id: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   deleteMessage: PropTypes.func.isRequired,
+  queue: PropTypes.shape({
+    queue: PropTypes.string,
+    queues: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
 };
 
-export default connect(null, { deleteMessage })(MessageDetails);
+const mapStateToProps = state => ({
+  queue: state.queue,
+});
+
+export default connect(mapStateToProps, { deleteMessage })(MessageDetails);

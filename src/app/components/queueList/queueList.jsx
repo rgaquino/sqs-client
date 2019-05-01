@@ -31,6 +31,7 @@ class QueueList extends Component {
 QueueList.propTypes = {
   getQueues: PropTypes.func.isRequired,
   queue: PropTypes.shape({
+    queue: PropTypes.string,
     queues: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
 };

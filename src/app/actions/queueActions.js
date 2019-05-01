@@ -1,7 +1,7 @@
 import axios from 'axios';
 import log from 'electron-log';
 
-import { GET_QUEUES } from './types';
+import { GET_QUEUES, GET_QUEUE } from './types';
 
 // TODO: This shouldn't be hardcoded.
 function getUrl(name) {
@@ -44,4 +44,12 @@ export const deleteQueue = (name, history) => () => {
       history.push('/');
     })
     .catch(err => log.error(err));
+};
+
+export const getQueue = queue => (dispatch) => {
+  dispatch({
+    type: GET_QUEUE,
+    payload: queue,
+  });
+  // TODO: should get messages here
 };

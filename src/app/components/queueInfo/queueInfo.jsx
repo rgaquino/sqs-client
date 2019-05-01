@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { deleteQueue } from '../../actions/queueActions';
+import { deleteQueue, getQueue } from '../../actions/queueActions';
 import { clearMessages } from '../../actions/messageActions';
 import SendMessage from './sendMessage';
 import MessageDetails from './messageDetails';
@@ -17,6 +17,10 @@ class QueueInfo extends Component {
     };
     this.deleteQueue = this.deleteQueue.bind(this);
     this.clearMessages = this.clearMessages.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.getQueue(this.state.queue);
   }
 
   deleteQueue() {
@@ -64,7 +68,8 @@ QueueInfo.propTypes = {
     }),
   }).isRequired,
   deleteQueue: PropTypes.func.isRequired,
+  getQueue: PropTypes.func.isRequired,
   clearMessages: PropTypes.func.isRequired,
 };
 
-export default connect(null, { deleteQueue, clearMessages })(QueueInfo);
+export default connect(null, { deleteQueue, getQueue, clearMessages })(QueueInfo);
