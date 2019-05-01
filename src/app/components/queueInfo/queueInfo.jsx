@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import log from 'electron-log';
 
 import { deleteQueue, getQueue } from '../../actions/queueActions';
 import { clearMessages } from '../../actions/messageActions';
@@ -32,6 +33,13 @@ class QueueInfo extends Component {
   }
 
   render() {
+    const { messages } = this.props.message;
+    const messageList = messages.map(m => (
+      <div className="col-md-12">
+        <MessageDetails key={m.id} id={m.id} body={m.body} />
+      </div>
+    ));
+
     return (
       <Fragment>
         <div className="container-fluid">
@@ -48,12 +56,7 @@ class QueueInfo extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-12">
-              <MessageDetails
-                id="5a4a8052-8304-4d91-b9f8-1963b3f1eb27"
-                body="hello hello hello"
-              />
-            </div>
+            { messageList }
           </div>
         </div>
       </Fragment>
@@ -70,6 +73,13 @@ QueueInfo.propTypes = {
   deleteQueue: PropTypes.func.isRequired,
   getQueue: PropTypes.func.isRequired,
   clearMessages: PropTypes.func.isRequired,
+  message: PropTypes.shape({
+    messages: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };
 
-export default connect(null, { deleteQueue, getQueue, clearMessages })(QueueInfo);
+const mapStateToProps = state => ({
+  message: state.message,
+});
+
+export default connect(mapStateToProps, { deleteQueue, getQueue, clearMessages })(QueueInfo);
