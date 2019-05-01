@@ -45,7 +45,10 @@ class QueueInfo extends Component {
           </div>
           <div className="row">
             <div className="col-md-12">
-              <MessageDetails />
+              <MessageDetails
+                id="5a4a8052-8304-4d91-b9f8-1963b3f1eb27"
+                body="hello hello hello"
+              />
             </div>
           </div>
         </div>

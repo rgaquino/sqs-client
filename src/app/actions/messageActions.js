@@ -27,3 +27,12 @@ export const clearMessages = queue => () => {
     })
     .catch(err => log.error(err));
 };
+
+export const deleteMessage = (queue, messageId) => () => {
+  const payload = { queue: getUrl(queue), messageId };
+  axios.delete('http://localhost:5010/message', { data: payload })
+    .then(() => {
+      log.info(`Message id=${messageId} deleted.`);
+    })
+    .catch(err => log.error(err));
+};
