@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { deleteQueue } from '../../actions/queueActions';
 import { clearMessages } from '../../actions/messageActions';
 import SendMessage from './sendMessage';
+import MessageDetails from './messageDetails';
 
 
 class QueueInfo extends Component {
@@ -35,7 +36,16 @@ class QueueInfo extends Component {
               <Link to="/" className="btn"><h2>{this.state.queue}</h2></Link>
               <button className="btn btn-danger" onClick={this.deleteQueue}>Delete</button>
               <button className="btn btn-warning" onClick={this.clearMessages}>Purge</button>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
               <SendMessage queue={this.state.queue} />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <MessageDetails />
             </div>
           </div>
         </div>
