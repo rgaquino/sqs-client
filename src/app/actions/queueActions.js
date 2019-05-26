@@ -2,7 +2,7 @@ import axios from 'axios';
 import log from 'electron-log';
 
 import { GET_QUEUES, GET_QUEUE, GET_MESSAGES } from './types';
-import { getMessages } from '../cache/messageCache';
+import { getQueueMessages } from '../cache/messageCache';
 
 // TODO: This shouldn't be hardcoded.
 function getUrl(name) {
@@ -54,6 +54,6 @@ export const getQueue = queue => (dispatch) => {
   });
   dispatch({
     type: GET_MESSAGES,
-    payload: getMessages(queue),
+    payload: getQueueMessages(queue),
   });
 };

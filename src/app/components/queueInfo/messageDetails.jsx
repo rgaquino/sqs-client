@@ -13,7 +13,7 @@ class MessageDetails extends Component {
 
   deleteMessage() {
     log.info(`deleting ${this.props.id} from queue=${this.props.queue.queue}`);
-    // this.props.deleteMessage(this.props.queue.queue, this.props.id);
+    this.props.deleteMessage(this.props.queue.queue, this.props.id);
   }
 
   render() {

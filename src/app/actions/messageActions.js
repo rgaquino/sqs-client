@@ -1,6 +1,6 @@
 import axios from 'axios';
 import log from 'electron-log';
-import { getMessages as gm, addToCache } from '../cache/messageCache';
+import { getQueueMessages, addToCache, removeFromCache, clearQueue } from '../cache/messageCache';
 import { GET_MESSAGES } from './types';
 
 // TODO: This shouldn't be hardcoded.
@@ -11,7 +11,7 @@ function getUrl(name) {
 export const getMessages = queue => (dispatch) => {
   dispatch({
     type: GET_MESSAGES,
-    payload: gm(queue),
+    payload: getQueueMessages(queue),
   });
 };
 
@@ -30,7 +30,9 @@ export const clearMessages = queue => () => {
   const payload = { queue: getUrl(queue) };
   axios.delete('http://localhost:5010/messages', { data: payload })
     .then(() => {
+      clearQueue(queue);
       log.info('Messages in queue purged');
+      getMessages(queue);
     })
     .catch(err => log.error(err));
 };
@@ -39,7 +41,9 @@ export const deleteMessage = (queue, messageId) => () => {
   const payload = { queue: getUrl(queue), messageId };
   axios.delete('http://localhost:5010/message', { data: payload })
     .then(() => {
+      removeFromCache(queue, messageId);
       log.info(`Message id=${messageId} deleted.`);
+      getMessages(queue);
     })
     .catch(err => log.error(err));
 };
