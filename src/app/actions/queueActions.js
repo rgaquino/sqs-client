@@ -3,11 +3,7 @@ import log from 'electron-log';
 
 import { GET_QUEUES, GET_QUEUE, GET_MESSAGES } from './types';
 import { getQueueMessages } from '../cache/messageCache';
-
-// TODO: This shouldn't be hardcoded.
-function getUrl(name) {
-  return `http://127.0.0.1:9324/queue/${name}`;
-}
+import { getQueueUrl } from './common';
 
 export const getQueues = () => (dispatch) => {
   axios.get('http://localhost:5010/queues')
@@ -38,7 +34,7 @@ export const createQueue = (name, history) => () => {
 };
 
 export const deleteQueue = (name, history) => () => {
-  const payload = { queue: getUrl(name) };
+  const payload = { queue: getQueueUrl(name) };
   axios.delete('http://localhost:5010/queue', { data: payload })
     .then(() => {
       getQueues();

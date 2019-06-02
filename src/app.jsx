@@ -8,10 +8,16 @@ import CreateQueue from './app/components/createQueue';
 import QueueInfo from './app/components/queueInfo';
 
 import { configureStore, history } from './store';
+import { initConfig } from './app/config/config';
 
 const store = configureStore();
 
 class App extends Component {
+
+  componentWillMount() {
+    initConfig();
+  }
+
   render() {
     return (
       <Provider store={store}>

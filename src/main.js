@@ -9,8 +9,8 @@ import router from './controller/router';
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-const isDevMode = process.execPath.match(/[\\/]electron/);
-
+// const isDevMode = process.execPath.match(/[\\/]electron/);
+const isDevMode = false;
 if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
 
 const createWindow = async () => {

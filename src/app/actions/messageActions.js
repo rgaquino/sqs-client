@@ -2,11 +2,7 @@ import axios from 'axios';
 import log from 'electron-log';
 import { getQueueMessages, addToCache, removeFromCache, clearQueue } from '../cache/messageCache';
 import { GET_MESSAGES } from './types';
-
-// TODO: This shouldn't be hardcoded.
-function getUrl(name) {
-  return `http://127.0.0.1:9324/queue/${name}`;
-}
+import { getQueueUrl } from './common';
 
 export const getMessages = queue => (dispatch) => {
   dispatch({
@@ -16,7 +12,7 @@ export const getMessages = queue => (dispatch) => {
 };
 
 export const sendMessage = (queue, message) => () => {
-  const payload = { queue: getUrl(queue), message };
+  const payload = { queue: getQueueUrl(queue), message };
   axios.post('http://localhost:5010/message', payload)
     .then((res) => {
       log.info('Message sent to queue');
@@ -27,7 +23,7 @@ export const sendMessage = (queue, message) => () => {
 };
 
 export const clearMessages = queue => () => {
-  const payload = { queue: getUrl(queue) };
+  const payload = { queue: getQueueUrl(queue) };
   axios.delete('http://localhost:5010/messages', { data: payload })
     .then(() => {
       clearQueue(queue);
@@ -38,7 +34,7 @@ export const clearMessages = queue => () => {
 };
 
 export const deleteMessage = (queue, messageId) => () => {
-  const payload = { queue: getUrl(queue), messageId };
+  const payload = { queue: getQueueUrl(queue), messageId };
   axios.delete('http://localhost:5010/message', { data: payload })
     .then(() => {
       removeFromCache(queue, messageId);

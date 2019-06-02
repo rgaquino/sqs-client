@@ -55,6 +55,7 @@
     "electron-devtools-installer": "^2.1.0",
     "electron-log": "^3.0.5",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^3.2.0",
     "express": "^4.16.4",
     "history": "^4.9.0",
     "prop-types": "^15.7.2",

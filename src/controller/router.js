@@ -13,10 +13,10 @@ const sqs = new AWS.SQS();
 // @desc    List all available queues
 // @access  Public
 router.get('/queues', (req, res) => {
-  log.info('Retrieving list of queues');
+  log.info('retrieving list of queues');
   sqs.listQueues((err, data) => {
     if (err) {
-      log.error('Failed to get list of queues');
+      log.error('failed to get list of queues');
       res.status(500)
         .json(err);
     } else {
@@ -36,10 +36,10 @@ router.post('/queue', (req, res) => {
     QueueName: req.body.name,
   };
 
-  log.info(`Creating queue "${req.body.name}"...`);
+  log.info(`creating queue "${req.body.name}"...`);
   sqs.createQueue(params, (err, data) => {
     if (err) {
-      log.error(`Failed to create queue "${req.body.name}"`);
+      log.error(`failed to create queue "${req.body.name}"`);
       res.status(500)
         .json(err);
     } else {
@@ -57,10 +57,10 @@ router.delete('/queue', (req, res) => {
     QueueUrl: req.body.queue,
   };
 
-  log.info(`Deleting queue ${req.body.queue}`);
+  log.info(`deleting queue ${req.body.queue}`);
   sqs.deleteQueue(params, (err, data) => {
     if (err) {
-      log.error(`Failed to delete queue ${req.body.queue}`);
+      log.error(`failed to delete queue ${req.body.queue}`);
       res.status(500)
         .json(err);
     } else {
@@ -79,10 +79,10 @@ router.post('/message', (req, res) => {
     QueueUrl: req.body.queue,
   };
 
-  log.info(`Sending message to ${req.body.queue}`);
+  log.info(`sending message to ${req.body.queue}`);
   sqs.sendMessage(params, (err, data) => {
     if (err) {
-      log.error(`Failed to send message to ${req.body.queue}`);
+      log.error(`failed to send message to ${req.body.queue}`);
       res.status(500)
         .json(err);
     } else {
@@ -100,10 +100,10 @@ router.delete('/messages', (req, res) => {
     QueueUrl: req.body.queue,
   };
 
-  log.info(`Clearing all messages in ${req.body.queue}`);
+  log.info(`clearing all messages in ${req.body.queue}`);
   sqs.purgeQueue(params, (err, data) => {
     if (err) {
-      log.error(`Failed to clear queue ${req.body.queue}`);
+      log.error(`failed to clear queue ${req.body.queue}`);
       res.status(500)
         .json(err);
     } else {
@@ -122,10 +122,10 @@ router.delete('/message', (req, res) => {
     ReceiptHandle: req.body.messageId,
   };
 
-  log.info(`Deleting ${req.body.messageId} from ${req.body.queue}`);
+  log.info(`deleting ${req.body.messageId} from ${req.body.queue}`);
   sqs.deleteMessage(params, (err, data) => {
     if (err) {
-      log.error(`Failed to delete message from ${req.body.queue}`);
+      log.error(`failed to delete message from ${req.body.queue}`);
       res.status(500)
         .json(err);
     } else {
@@ -143,10 +143,10 @@ router.get('/message', (req, res) => {
     QueueUrl: req.body.queue,
   };
 
-  log.info(`Retrieving message from ${req.body.queue}`);
+  log.info(`retrieving message from ${req.body.queue}`);
   sqs.receiveMessage(params, (err, data) => {
     if (err) {
-      log.error(`Failed to retrieve message from ${req.body.queue}`);
+      log.error(`failed to retrieve message from ${req.body.queue}`);
       res.status(500)
         .json(err);
     } else {
