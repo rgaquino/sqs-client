@@ -11,6 +11,7 @@
     "publish": "electron-forge publish",
     "lint": "eslint --cache --color --ext .jsx,.js src"
   },
+  "repository": "https://github.com/rgaquino/sqs-client",
   "keywords": [],
   "author": "rgaquino",
   "license": "MIT",
@@ -29,7 +30,7 @@
         ]
       },
       "electronPackagerConfig": {
-        "packageManager": "yarn"
+        "packageManager": "npm"
       },
       "electronWinstallerConfig": {
         "name": "sqs_client"
