@@ -19,7 +19,7 @@ addons:
 
 install:
   - npm install
-  - npm update
+#  - npm update
 
 script:
 #  - npm run lint
