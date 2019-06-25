@@ -12,7 +12,10 @@ export const getQueues = filter => (dispatch) => {
   }
   axios.get(url)
     .then((res) => {
-      const queues = res.data.queues.map(q => q.substring(q.lastIndexOf('/') + 1));
+      let queues = [];
+      if (res.data.queues) {
+        queues = res.data.queues.map(q => q.substring(q.lastIndexOf('/') + 1));
+      }
       dispatch({
         type: GET_QUEUES,
         payload: queues,
@@ -22,7 +25,7 @@ export const getQueues = filter => (dispatch) => {
       log.error(err);
       dispatch({
         type: GET_QUEUES,
-        payload: {},
+        payload: [],
       });
     });
 };
