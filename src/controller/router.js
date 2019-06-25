@@ -13,8 +13,12 @@ const sqs = new AWS.SQS();
 // @desc    List all available queues
 // @access  Public
 router.get('/queues', (req, res) => {
+  const params = {
+    QueueNamePrefix: req.query.q,
+  };
+
   log.info('retrieving list of queues');
-  sqs.listQueues((err, data) => {
+  sqs.listQueues(params, (err, data) => {
     if (err) {
       log.error('failed to get list of queues');
       res.status(500)

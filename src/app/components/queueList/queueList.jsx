@@ -7,8 +7,26 @@ import QueueListItem from './queueListItem';
 import { getQueues } from '../../actions/queueActions';
 
 class QueueList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      q: '',
+    };
+    this.searchFilterChange = this.searchFilterChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentDidMount() {
     this.props.getQueues();
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.getQueues(this.state.q);
+  }
+
+  searchFilterChange(e) {
+    this.setState({ q: e.target.value });
   }
 
   render() {
@@ -17,7 +35,16 @@ class QueueList extends Component {
     return (
       <Fragment>
         <div className="container-fluid">
-          <input className="form-control" type="text" placeholder="Search..." />
+          <form onSubmit={this.handleSubmit}>
+            <input
+              className="form-control"
+              type="text"
+              placeholder="Search..."
+              onChange={this.searchFilterChange}
+              value={this.state.q}
+            />
+            <input type="submit" value="Search" />
+          </form>
           <ul className="list-group">
             {queues.map(q => <QueueListItem key={q} queue={q} />)}
           </ul>

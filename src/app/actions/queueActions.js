@@ -5,8 +5,12 @@ import { GET_QUEUES, GET_QUEUE, GET_MESSAGES } from './types';
 import { getQueueMessages } from '../cache/messageCache';
 import { getQueueUrl } from './common';
 
-export const getQueues = () => (dispatch) => {
-  axios.get('http://localhost:5010/queues')
+export const getQueues = filter => (dispatch) => {
+  let url = 'http://localhost:5010/queues';
+  if (filter) {
+    url = `${url}?q=${filter}`;
+  }
+  axios.get(url)
     .then((res) => {
       const queues = res.data.queues.map(q => q.substring(q.lastIndexOf('/') + 1));
       dispatch({
