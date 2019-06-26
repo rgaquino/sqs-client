@@ -9,6 +9,7 @@ import QueueInfo from './app/components/queueInfo';
 
 import { configureStore, history } from './store';
 import { initConfig } from './app/config/config';
+import Configuration from './app/components/configuration';
 
 const store = configureStore();
 
@@ -24,6 +25,7 @@ class App extends Component {
         <ConnectedRouter history={history}>
           <Switch>
             <Route exact path="/" component={QueueList} />
+            <Route exact path="/config" component={Configuration} />
             <Route exact path="/create" component={CreateQueue} />
             <Route exact path="/queue/:name" component={QueueInfo} />
           </Switch>

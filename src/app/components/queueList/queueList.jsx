@@ -35,20 +35,25 @@ class QueueList extends Component {
     return (
       <Fragment>
         <div className="container-fluid">
-          <form onSubmit={this.handleSubmit}>
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Search..."
-              onChange={this.searchFilterChange}
-              value={this.state.q}
-            />
-            <input type="submit" value="Search" />
-          </form>
-          <ul className="list-group">
-            {queues.map(q => <QueueListItem key={q} queue={q} />)}
-          </ul>
-          <Link to="/create" className="btn btn-primary btn-block mt-4">Create queue</Link>
+          <div className="row">
+            <div className="col-md-12">
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="Search..."
+                  onChange={this.searchFilterChange}
+                  value={this.state.q}
+                />
+                <input type="submit" value="Search" />
+              </form>
+              <ul className="list-group">
+                {queues.map(q => <QueueListItem key={q} queue={q} />)}
+              </ul>
+              <Link to="/create" className="btn btn-primary btn-block mt-4">New Queue</Link>
+              <Link to="/config" className="btn btn-primary btn-block mt-4">Configuration</Link>
+            </div>
+          </div>
         </div>
       </Fragment>
     );
