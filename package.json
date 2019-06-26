@@ -48,24 +48,24 @@
     }
   },
   "dependencies": {
-    "aws-sdk": "^2.437.0",
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.3",
+    "aws-sdk": "^2.482.0",
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
     "connected-react-router": "^6.4.0",
     "electron-compile": "^6.4.4",
     "electron-devtools-installer": "^2.1.0",
-    "electron-log": "^3.0.5",
+    "electron-log": "^3.0.6",
     "electron-squirrel-startup": "^1.0.0",
-    "electron-store": "^3.2.0",
-    "express": "^4.16.4",
+    "electron-store": "^3.3.0",
+    "express": "^4.17.1",
     "history": "^4.9.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^3.0.0-beta.6",
     "react-redux": "^6.0.1",
-    "react-router": "^5.0.0",
-    "react-router-dom": "^5.0.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },
@@ -78,8 +78,8 @@
     "electron-prebuilt-compile": "4.0.0",
     "eslint": "^3",
     "eslint-config-airbnb": "^15",
-    "eslint-plugin-import": "^2",
+    "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^5",
-    "eslint-plugin-react": "^7"
+    "eslint-plugin-react": "^7.14.2"
   }
 }
