@@ -37,21 +37,28 @@ class QueueList extends Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-12">
+              <div className="d-flex justify-content-center">
+                <Link to="/" className="btn"><h1>SQS Client</h1></Link>
+              </div>
               <form onSubmit={this.handleSubmit}>
-                <input
-                  className="form-control"
-                  type="text"
-                  placeholder="Search..."
-                  onChange={this.searchFilterChange}
-                  value={this.state.q}
-                />
-                <input type="submit" value="Search" />
+                <div className="input-group mb-3">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Search..."
+                    onChange={this.searchFilterChange}
+                    value={this.state.q}
+                  />
+                  <div className="input-group-append">
+                    <button className="btn btn-outline-secondary" type="submit">Search</button>
+                  </div>
+                </div>
               </form>
               <ul className="list-group">
                 {queues.map(q => <QueueListItem key={q} queue={q} />)}
               </ul>
               <Link to="/create" className="btn btn-primary btn-block mt-4">New Queue</Link>
-              <Link to="/config" className="btn btn-primary btn-block mt-4">Configuration</Link>
+              <Link to="/config" className="btn btn-secondary btn-block mt-4">Configuration</Link>
             </div>
           </div>
         </div>

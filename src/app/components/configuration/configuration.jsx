@@ -30,10 +30,10 @@ class Configuration extends Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-12">
+              <div className="d-flex justify-content-center">
+                <Link to="/" className="btn"><h2>Configuration</h2></Link>
+              </div>
               <form>
-                <div className="d-flex justify-content-center">
-                  <Link to="/" className="btn"><h2>Configuration</h2></Link>
-                </div>
                 <div className="form-group">
                   <label htmlFor="exampleInputEmail1">AWS Access Key</label>
                   <input
