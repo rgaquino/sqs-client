@@ -28,16 +28,25 @@ class CreateQueue extends Component {
   render() {
     return (
       <Fragment>
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
             <div className="col-md-12">
               <form onSubmit={this.onSubmit}>
-                <input
-                  className="form-control"
-                  name="name"
-                  placeholder="Queue Name"
-                  onChange={this.onChange}
-                />
+                <div className="d-flex justify-content-center">
+                  <Link to="/" className="btn"><h2>New Queue</h2></Link>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputEmail1">Queue Name</label>
+                  <input
+                    className="form-control"
+                    name="name"
+                    placeholder="Queue Name"
+                    onChange={this.onChange}
+                  />
+                  <small id="emailHelp" className="form-text text-muted">
+                    Only alphanumeric characters allowed.
+                  </small>
+                </div>
                 <input type="submit" value="Submit" className="btn btn-primary btn-block" />
                 <Link to="/" className="btn btn-secondary btn-block">Back</Link>
               </form>
