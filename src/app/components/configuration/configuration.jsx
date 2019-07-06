@@ -35,50 +35,50 @@ class Configuration extends Component {
               </div>
               <form>
                 <div className="form-group">
-                  <label htmlFor="exampleInputEmail1">AWS Access Key</label>
+                  <label htmlFor="accessKey">AWS Access Key</label>
                   <input
                     className="form-control"
                     name="accessKey"
                     placeholder="AWS Access Key"
                     onChange={this.onChange}
                   />
-                  <small id="emailHelp" className="form-text text-muted">
+                  <small id="accessKeyHelp" className="form-text text-muted">
                     This is only stored locally.
                   </small>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputEmail1">AWS Secret Access Key</label>
+                  <label htmlFor="secretAccessKey">AWS Secret Access Key</label>
                   <input
                     className="form-control"
                     name="secretAccessKey"
                     placeholder="AWS Secret Access Key"
                     onChange={this.onChange}
                   />
-                  <small id="emailHelp" className="form-text text-muted">
+                  <small id="secretAccessKeyHelp" className="form-text text-muted">
                     This is only stored locally.
                   </small>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputEmail1">Region</label>
+                  <label htmlFor="region">Region</label>
                   <input
                     className="form-control"
                     name="region"
                     placeholder="Region"
                     onChange={this.onChange}
                   />
-                  <small id="emailHelp" className="form-text text-muted">
+                  <small id="regionHelp" className="form-text text-muted">
                     e.g. eu-west-2
                   </small>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputEmail1">Endpoint</label>
+                  <label htmlFor="endpoint">Endpoint</label>
                   <input
                     className="form-control"
                     name="endpoint"
                     placeholder="Endpoint"
                     onChange={this.onChange}
                   />
-                  <small id="emailHelp" className="form-text text-muted">
+                  <small id="endpointHelp" className="form-text text-muted">
                     e.g. http://127.0.0.1:9324
                   </small>
                 </div>
