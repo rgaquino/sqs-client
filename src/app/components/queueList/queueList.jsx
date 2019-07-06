@@ -35,11 +35,26 @@ class QueueList extends Component {
     return (
       <Fragment>
         <div className="container-fluid">
+          {/* Header */}
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-sm-12">
               <div className="d-flex justify-content-center">
                 <Link to="/" className="btn"><h1>SQS Client</h1></Link>
               </div>
+            </div>
+          </div>
+          {/* Action Buttons */}
+          <div className="row mb-4">
+            <div className="col-sm-6">
+              <Link to="/create" className="btn btn-primary btn-block">New Queue</Link>
+            </div>
+            <div className="col-sm-6">
+              <Link to="/config" className="btn btn-secondary btn-block">Configuration</Link>
+            </div>
+          </div>
+          {/* Search and  Queue List */}
+          <div className="row">
+            <div className="col-md-12">
               <form onSubmit={this.handleSubmit}>
                 <div className="input-group mb-3">
                   <input
@@ -54,11 +69,11 @@ class QueueList extends Component {
                   </div>
                 </div>
               </form>
+            </div>
+            <div className="col-md-12">
               <ul className="list-group">
                 {queues.map(q => <QueueListItem key={q} queue={q} />)}
               </ul>
-              <Link to="/create" className="btn btn-primary btn-block mt-4">New Queue</Link>
-              <Link to="/config" className="btn btn-secondary btn-block mt-4">Configuration</Link>
             </div>
           </div>
         </div>

@@ -33,29 +33,78 @@ class QueueInfo extends Component {
 
   render() {
     const { messages } = this.props.message;
-    const messageList = Object.keys(messages).map(key => (
-      <div key={key} className="col-md-12">
-        <MessageDetails id={key} body={messages[key]} />
-      </div>
-    ));
+    const messageList = Object.keys(messages)
+      .map(key => (
+        <div key={key} className="col-md-12">
+          <MessageDetails id={key} body={messages[key]} />
+        </div>
+      ));
 
     return (
       <Fragment>
         <div className="container-fluid">
+          {/* Header */}
           <div className="row">
-            <div className="col-md-12">
-              <Link to="/" className="btn"><h2>{this.state.queue}</h2></Link>
-              <button className="btn btn-danger" onClick={this.deleteQueue}>Delete</button>
-              <button className="btn btn-warning" onClick={this.clearMessages}>Purge</button>
+            <div className="col-sm-12">
+              <div className="d-flex justify-content-center">
+                <Link to="/" className="btn"><h2>Queue Information</h2></Link>
+              </div>
             </div>
           </div>
+          {/* Queue Information */}
+          <div className="row">
+            <div className="col-sm-12">
+              <form>
+                <div className="form-group row">
+                  <label htmlFor="queueName" className="col-sm-2 col-form-label">Name:</label>
+                  <div className="col-sm-10">
+                    <input
+                      className="form-control"
+                      name="queueName"
+                      onChange={this.onChange}
+                      value={this.state.queue}
+                      readOnly
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label htmlFor="queueName" className="col-sm-2 col-form-label">Count:</label>
+                  <div className="col-sm-10">
+                    <input
+                      className="form-control"
+                      name="queueName"
+                      onChange={this.onChange}
+                      value="14"
+                      readOnly
+                    />
+                  </div>
+                </div>
+                {/* TODO: Add more information */}
+              </form>
+            </div>
+          </div>
+          {/* Queue Action Buttons */}
+          <div className="row mb-4">
+            <div className="col-sm-6">
+              <button className="btn btn-danger btn-block" onClick={this.deleteQueue}>
+                Delete
+              </button>
+            </div>
+            <div className="col-sm-6">
+              <button className="btn btn-warning btn-block" onClick={this.clearMessages}>
+                Purge
+              </button>
+            </div>
+          </div>
+          {/* Message Box */}
           <div className="row">
             <div className="col-md-12">
               <SendMessage queue={this.state.queue} />
             </div>
           </div>
+          {/* Message Box */}
           <div className="row">
-            { messageList }
+            {messageList}
           </div>
         </div>
       </Fragment>
