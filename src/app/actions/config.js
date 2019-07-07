@@ -1,7 +1,10 @@
-import { getConfig } from '../config/config';
+import log from 'electron-log';
+
+import { getConfig, setConfig } from '../config/configStore';
 import { GET_CONN_CONFIG } from './types';
 
 export const getConnectionConfig = () => (dispatch) => {
+  log.debug('retrieving connection configuration...');
   dispatch({
     type: GET_CONN_CONFIG,
     payload: {
@@ -11,4 +14,14 @@ export const getConnectionConfig = () => (dispatch) => {
       endpoint: getConfig('endpoint'),
     },
   });
+};
+
+export const setConnectionConfig = config => () => {
+  log.debug('saving new connection configuration...');
+  setConfig('accessKeyId', config.accessKeyId);
+  setConfig('secretAccessKey', config.secretAccessKey);
+  setConfig('region', config.region);
+  setConfig('endpoint', config.endpoint);
+  getConnectionConfig();
+  // TODO: Reload connection to use new configuration
 };
