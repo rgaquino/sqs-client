@@ -8,7 +8,7 @@ import CreateQueue from './app/components/createQueue';
 import QueueInfo from './app/components/queueInfo';
 
 import { configureStore, history } from './store';
-import { initConfig } from './app/config/config';
+import { initConfig } from './app/config/configStore';
 import Configuration from './app/components/configuration';
 
 const store = configureStore();
