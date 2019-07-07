@@ -88,7 +88,6 @@ class Configuration extends Component {
                 </div>
                 <input type="submit" value="Submit" className="btn btn-primary btn-block" />
                 <Link to="/" className="btn btn-secondary btn-block">Back</Link>
-                <Link to="/" className="btn btn-secondary btn-block">Back</Link>
               </form>
             </div>
           </div>
