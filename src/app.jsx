@@ -10,6 +10,7 @@ import QueueInfo from './app/components/queueInfo';
 import { configureStore, history } from './store';
 import { initConfig } from './app/config/configStore';
 import Configuration from './app/components/configuration';
+import sqs from './app/controller/sqs';
 
 const store = configureStore();
 
@@ -17,6 +18,7 @@ class App extends Component {
 
   componentWillMount() {
     initConfig();
+    sqs.initialize();
   }
 
   render() {
