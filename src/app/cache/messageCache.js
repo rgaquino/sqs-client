@@ -7,6 +7,7 @@ export const addToCache = (queue, id, body) => {
     messages[queue] = {};
   }
   messages[queue][id] = body;
+  log.debug(`queue=${queue} contents: ${JSON.stringify(messages[queue])}`);
 };
 
 export const removeFromCache = (queue, id) => {

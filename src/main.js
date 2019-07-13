@@ -1,9 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 import { enableLiveReload } from 'electron-compile';
-import express from 'express';
-import bodyParser from 'body-parser';
-import router from './controller/router';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -65,10 +62,3 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-
-// API
-const api = express();
-api.use(bodyParser.json());
-api.use(bodyParser.urlencoded({ extended: true }));
-api.use(router);
-api.listen(5010);

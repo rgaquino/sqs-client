@@ -1,20 +1,17 @@
-import axios from 'axios';
 import log from 'electron-log';
 
 import { GET_QUEUES, GET_QUEUE, GET_MESSAGES } from './types';
 import { getQueueMessages } from '../cache/messageCache';
 import { getQueueUrl } from './common';
+import sqs from '../controller/sqs';
 
+// List all available queues
 export const getQueues = filter => (dispatch) => {
-  let url = 'http://localhost:5010/queues';
-  if (filter) {
-    url = `${url}?q=${filter}`;
-  }
-  axios.get(url)
+  sqs.listQueues(filter)
     .then((res) => {
       let queues = [];
-      if (res.data.queues) {
-        queues = res.data.queues.map(q => q.substring(q.lastIndexOf('/') + 1));
+      if (res.queues) {
+        queues = res.queues.map(q => q.substring(q.lastIndexOf('/') + 1));
       }
       dispatch({
         type: GET_QUEUES,
@@ -22,7 +19,7 @@ export const getQueues = filter => (dispatch) => {
       });
     })
     .catch((err) => {
-      log.error(err);
+      log.error(`failed to list queues, err=${err}`);
       dispatch({
         type: GET_QUEUES,
         payload: [],
@@ -30,24 +27,24 @@ export const getQueues = filter => (dispatch) => {
     });
 };
 
+// Create a queue
 export const createQueue = (name, history) => () => {
-  const payload = { name };
-  axios.post('http://localhost:5010/queue', payload)
+  sqs.createQueue(name)
     .then(() => {
       getQueues();
       history.push('/');
     })
-    .catch(err => log.error(err));
+    .catch(err => log.error(`failed to create queue, name=${history}, err=${err}`));
 };
 
+// Delete queue
 export const deleteQueue = (name, history) => () => {
-  const payload = { queue: getQueueUrl(name) };
-  axios.delete('http://localhost:5010/queue', { data: payload })
+  sqs.deleteQueue(getQueueUrl(name))
     .then(() => {
       getQueues();
       history.push('/');
     })
-    .catch(err => log.error(err));
+    .catch(err => log.error(`failed to delete queue, ame=${history}, err=${err}`));
 };
 
 export const getQueue = queue => (dispatch) => {
