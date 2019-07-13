@@ -1,81 +1,50 @@
 import log from 'electron-log';
 
-import { initialize } from '../controller/aws';
-
 import { GET_QUEUES, GET_QUEUE, GET_MESSAGES } from './types';
 import { getQueueMessages } from '../cache/messageCache';
 import { getQueueUrl } from './common';
-
-const sqs = initialize();
+import sqs from '../controller/sqs';
 
 // List all available queues
 export const getQueues = filter => (dispatch) => {
-  let params = {};
-  if (filter) {
-    params = {
-      QueueNamePrefix: filter,
-    };
-  }
-
-  log.info('retrieving list of queues');
-  sqs.listQueues(params, (err, data) => {
-    if (err) {
-      log.error(`failed to get list of queues, err=${err}`);
+  sqs.listQueues(filter)
+    .then((res) => {
+      let queues = [];
+      if (res.queues) {
+        queues = res.queues.map(q => q.substring(q.lastIndexOf('/') + 1));
+      }
+      dispatch({
+        type: GET_QUEUES,
+        payload: queues,
+      });
+    })
+    .catch((err) => {
+      log.error(`failed to list queues, err=${err}`);
       dispatch({
         type: GET_QUEUES,
         payload: [],
       });
-      return err;
-    }
-
-    let queues = [];
-    if (data.queues) {
-      queues = data.QueueUrls.map(q => q.substring(q.lastIndexOf('/') + 1));
-    }
-    dispatch({
-      type: GET_QUEUES,
-      payload: queues,
     });
-    return data;
-  });
 };
 
 // Create a queue
 export const createQueue = (name, history) => () => {
-  const params = {
-    QueueName: name,
-  };
-
-  log.info(`creating queue "${name}"...`);
-  sqs.createQueue(params, (err, data) => {
-    if (err) {
-      log.error(`failed to create queue "${name}"`);
-      return err;
-    }
-
-    getQueues();
-    history.push('/');
-    return data;
-  });
+  sqs.createQueue(name)
+    .then(() => {
+      getQueues();
+      history.push('/');
+    })
+    .catch(err => log.error(`failed to create queue, name=${history}, err=${err}`));
 };
 
 // Delete queue
 export const deleteQueue = (name, history) => () => {
-  const params = {
-    QueueUrl: getQueueUrl(name),
-  };
-
-  log.info(`deleting queue ${name}`);
-  sqs.deleteQueue(params, (err, data) => {
-    if (err) {
-      log.error(`failed to delete queue ${name}`);
-      return err;
-    }
-
-    getQueues();
-    history.push('/');
-    return data;
-  });
+  sqs.deleteQueue(getQueueUrl(name))
+    .then(() => {
+      getQueues();
+      history.push('/');
+    })
+    .catch(err => log.error(`failed to delete queue, ame=${history}, err=${err}`));
 };
 
 export const getQueue = queue => (dispatch) => {
