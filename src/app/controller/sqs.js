@@ -1,6 +1,5 @@
 import path from 'path';
 import AWS from 'aws-sdk/index';
-import { getQueueUrl } from '../actions/common';
 
 const sqs = {};
 
@@ -60,7 +59,7 @@ sqs.purgeQueue = function purgeQueue(queue) {
       QueueUrl: queue,
     };
 
-    sqs.purgeQueue(params, (err, data) => {
+    sqs.client.purgeQueue(params, (err, data) => {
       if (err) {
         reject(err);
       }
@@ -72,10 +71,10 @@ sqs.purgeQueue = function purgeQueue(queue) {
 sqs.sendMessage = function sendMessage(queue, message) {
   return new Promise((resolve, reject) => {
     const params = {
+      QueueUrl: queue,
       MessageBody: message,
-      QueueUrl: getQueueUrl(queue),
     };
-    sqs.sendMessage(params, (err, data) => {
+    sqs.client.sendMessage(params, (err, data) => {
       if (err) {
         reject(err);
       }
@@ -90,7 +89,7 @@ sqs.deleteMessage = function deleteMessage(queue, messageId) {
       QueueUrl: queue,
       ReceiptHandle: messageId,
     };
-    sqs.deleteMessage(params, (err, data) => {
+    sqs.client.deleteMessage(params, (err, data) => {
       if (err) {
         reject(err);
       }
