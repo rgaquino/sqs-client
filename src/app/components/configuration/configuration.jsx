@@ -48,7 +48,7 @@ class Configuration extends Component {
           <div className="row">
             <div className="col-md-12">
               <div className="d-flex justify-content-center">
-                <Link to="/queues" className="btn"><h2>Configuration</h2></Link>
+                <h2>Configuration</h2>
               </div>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
