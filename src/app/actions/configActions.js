@@ -1,28 +1,45 @@
 import log from 'electron-log';
 
-import { getConfig, setConfig } from '../config/configStore';
+import sqs from '../controllers/sqs';
+import { getConfig, setConfig } from '../controllers/config';
 import { GET_CONN_CONFIG } from './types';
+
+const CONFIG_ACCESS_KEY_ID = 'accessKeyId';
+const CONFIG_SECRET_ACCESS_KEY_ID = 'secretAccessKey';
+const CONFIG_REGION = 'region';
+const CONFIG_ENDPOINT = 'endpoint';
 
 export const getConnectionConfig = () => (dispatch) => {
   log.debug('retrieving connection configuration...');
   dispatch({
     type: GET_CONN_CONFIG,
     payload: {
-      accessKeyId: getConfig('accessKeyId'),
-      secretAccessKey: getConfig('secretAccessKey'),
-      region: getConfig('region'),
-      endpoint: getConfig('endpoint'),
+      accessKeyId: getConfig(CONFIG_ACCESS_KEY_ID),
+      secretAccessKey: getConfig(CONFIG_SECRET_ACCESS_KEY_ID),
+      region: getConfig(CONFIG_REGION),
+      endpoint: getConfig(CONFIG_ENDPOINT),
     },
   });
 };
 
 export const setConnectionConfig = (config, history) => () => {
   log.debug('saving new connection configuration...');
-  setConfig('accessKeyId', config.accessKeyId);
-  setConfig('secretAccessKey', config.secretAccessKey);
-  setConfig('region', config.region);
-  setConfig('endpoint', config.endpoint);
-  getConnectionConfig();
-  history.push('/queues');
-  // TODO: Reload connection to use new configuration
+
+  // Save config in electron-store
+  setConfig(CONFIG_ACCESS_KEY_ID, config.accessKeyId);
+  setConfig(CONFIG_SECRET_ACCESS_KEY_ID, config.secretAccessKey);
+  setConfig(CONFIG_REGION, config.region);
+  setConfig(CONFIG_ENDPOINT, config.endpoint);
+
+  // Load SQS controller from provided configuration
+  sqs.initialize({
+    accessKeyId: config.accessKeyId,
+    secretAccessKey: config.secretAccessKey,
+    region: config.region,
+    endpoint: config.endpoint,
+  })
+    .then(() => {
+      getConnectionConfig();
+      history.push('/queues');
+    });
 };

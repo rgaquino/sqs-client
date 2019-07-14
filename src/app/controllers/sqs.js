@@ -1,12 +1,14 @@
-import path from 'path';
 import AWS from 'aws-sdk/index';
 
 const sqs = {};
 
-sqs.initialize = function initialize() {
-  // Load AWS config
-  AWS.config.loadFromPath(path.join(__dirname, '/../config/config.json'));
-  sqs.client = new AWS.SQS();
+sqs.initialize = function initialize(config) {
+  return new Promise((resolve) => {
+    // Load AWS config
+    AWS.config = new AWS.Config(config);
+    sqs.client = new AWS.SQS();
+    resolve();
+  });
 };
 
 sqs.listQueues = function listQueues(filter) {

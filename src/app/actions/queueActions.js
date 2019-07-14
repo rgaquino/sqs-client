@@ -3,7 +3,7 @@ import log from 'electron-log';
 import { GET_QUEUES, GET_QUEUE, GET_MESSAGES } from './types';
 import { getQueueMessages } from '../cache/messageCache';
 import { getQueueUrl } from './common';
-import sqs from '../controller/sqs';
+import sqs from '../controllers/sqs';
 
 // List all available queues
 export const getQueues = filter => (dispatch) => {

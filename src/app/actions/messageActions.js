@@ -2,7 +2,7 @@ import log from 'electron-log';
 import { getQueueMessages, addToCache, removeFromCache, clearQueue } from '../cache/messageCache';
 import { GET_MESSAGES } from './types';
 import { getQueueUrl } from './common';
-import sqs from '../controller/sqs';
+import sqs from '../controllers/sqs';
 
 export const getMessages = queue => (dispatch) => {
   dispatch({
