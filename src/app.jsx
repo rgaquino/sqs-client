@@ -8,9 +8,9 @@ import CreateQueue from './app/components/createQueue';
 import QueueInfo from './app/components/queueInfo';
 
 import { configureStore, history } from './store';
-import { initConfig } from './app/config/configStore';
+import { initConfig } from './app/controllers/config';
 import Configuration from './app/components/configuration';
-import sqs from './app/controller/sqs';
+
 
 const store = configureStore();
 
@@ -18,7 +18,6 @@ class App extends Component {
 
   componentWillMount() {
     initConfig();
-    sqs.initialize();
   }
 
   render() {
@@ -26,8 +25,8 @@ class App extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route exact path="/" component={QueueList} />
-            <Route exact path="/config" component={Configuration} />
+            <Route exact path="/" component={Configuration} />
+            <Route exact path="/queues" component={QueueList} />
             <Route exact path="/create" component={CreateQueue} />
             <Route exact path="/queue/:name" component={QueueInfo} />
           </Switch>

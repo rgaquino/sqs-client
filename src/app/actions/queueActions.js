@@ -2,8 +2,7 @@ import log from 'electron-log';
 
 import { GET_QUEUES, GET_QUEUE, GET_MESSAGES } from './types';
 import { getQueueMessages } from '../cache/messageCache';
-import { getQueueUrl } from './common';
-import sqs from '../controller/sqs';
+import sqs from '../controllers/sqs';
 
 // List all available queues
 export const getQueues = filter => (dispatch) => {
@@ -32,17 +31,17 @@ export const createQueue = (name, history) => () => {
   sqs.createQueue(name)
     .then(() => {
       getQueues();
-      history.push('/');
+      history.push('/queues');
     })
     .catch(err => log.error(`failed to create queue, name=${history}, err=${err}`));
 };
 
 // Delete queue
-export const deleteQueue = (name, history) => () => {
-  sqs.deleteQueue(getQueueUrl(name))
+export const deleteQueue = (queue, history) => () => {
+  sqs.deleteQueue(queue)
     .then(() => {
       getQueues();
-      history.push('/');
+      history.push('/queues');
     })
     .catch(err => log.error(`failed to delete queue, ame=${history}, err=${err}`));
 };

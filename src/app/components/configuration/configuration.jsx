@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getConnectionConfig, setConnectionConfig } from '../../actions/config';
+import { getConnectionConfig, setConnectionConfig } from '../../actions/configActions';
 
 class Configuration extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class Configuration extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.setConnectionConfig(this.state);
+    this.props.setConnectionConfig(this.state, this.props.history);
   }
 
   render() {
@@ -48,7 +48,7 @@ class Configuration extends Component {
           <div className="row">
             <div className="col-md-12">
               <div className="d-flex justify-content-center">
-                <Link to="/" className="btn"><h2>Configuration</h2></Link>
+                <Link to="/queues" className="btn"><h2>Configuration</h2></Link>
               </div>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
@@ -103,8 +103,7 @@ class Configuration extends Component {
                     e.g. http://127.0.0.1:9324
                   </small>
                 </div>
-                <input type="submit" value="Save" className="btn btn-primary btn-block" />
-                <Link to="/" className="btn btn-secondary btn-block">Back</Link>
+                <input type="submit" value="Connect" className="btn btn-primary btn-block" />
               </form>
             </div>
           </div>
@@ -118,6 +117,7 @@ Configuration.propTypes = {
   getConnectionConfig: PropTypes.func.isRequired,
   setConnectionConfig: PropTypes.func.isRequired,
   config: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({

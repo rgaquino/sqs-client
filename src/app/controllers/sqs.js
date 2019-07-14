@@ -1,12 +1,18 @@
-import path from 'path';
 import AWS from 'aws-sdk/index';
 
 const sqs = {};
 
-sqs.initialize = function initialize() {
-  // Load AWS config
-  AWS.config.loadFromPath(path.join(__dirname, '/../config/config.json'));
-  sqs.client = new AWS.SQS();
+function getQueueUrl(name) {
+  return `${AWS.config.endpoint}/queue/${name}`;
+}
+
+sqs.initialize = function initialize(config) {
+  return new Promise((resolve) => {
+    // Load AWS config
+    AWS.config = new AWS.Config(config);
+    sqs.client = new AWS.SQS();
+    resolve();
+  });
 };
 
 sqs.listQueues = function listQueues(filter) {
@@ -42,7 +48,7 @@ sqs.createQueue = function createQueue(name) {
 sqs.deleteQueue = function deleteQueue(queue) {
   return new Promise((resolve, reject) => {
     const params = {
-      QueueUrl: queue,
+      QueueUrl: getQueueUrl(queue),
     };
     sqs.client.deleteQueue(params, (err, data) => {
       if (err) {
@@ -56,7 +62,7 @@ sqs.deleteQueue = function deleteQueue(queue) {
 sqs.purgeQueue = function purgeQueue(queue) {
   return new Promise((resolve, reject) => {
     const params = {
-      QueueUrl: queue,
+      QueueUrl: getQueueUrl(queue),
     };
 
     sqs.client.purgeQueue(params, (err, data) => {
@@ -71,7 +77,7 @@ sqs.purgeQueue = function purgeQueue(queue) {
 sqs.sendMessage = function sendMessage(queue, message) {
   return new Promise((resolve, reject) => {
     const params = {
-      QueueUrl: queue,
+      QueueUrl: getQueueUrl(queue),
       MessageBody: message,
     };
     sqs.client.sendMessage(params, (err, data) => {
@@ -86,7 +92,7 @@ sqs.sendMessage = function sendMessage(queue, message) {
 sqs.deleteMessage = function deleteMessage(queue, messageId) {
   return new Promise((resolve, reject) => {
     const params = {
-      QueueUrl: queue,
+      QueueUrl: getQueueUrl(queue),
       ReceiptHandle: messageId,
     };
     sqs.client.deleteMessage(params, (err, data) => {
