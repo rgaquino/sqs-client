@@ -1,7 +1,6 @@
 import log from 'electron-log';
 import { getQueueMessages, addToCache, removeFromCache, clearQueue } from '../cache/messageCache';
 import { GET_MESSAGES } from './types';
-import { getQueueUrl } from './common';
 import sqs from '../controllers/sqs';
 
 export const getMessages = queue => (dispatch) => {
@@ -14,7 +13,7 @@ export const getMessages = queue => (dispatch) => {
 // Send a message to a queue
 export const sendMessage = (queue, message) => () => {
   log.debug(`DEBUG: sending message to queue="${queue}"`);
-  sqs.sendMessage(getQueueUrl(queue), message)
+  sqs.sendMessage(queue, message)
     .then((res) => {
       log.info(`INFO: message sent to queue="${queue}", id="${res.MessageId}"`);
       addToCache(queue, res.MessageId, message);
@@ -26,7 +25,7 @@ export const sendMessage = (queue, message) => () => {
 // Purge all messages in queue
 export const clearMessages = queue => () => {
   log.debug(`DEBUG: purging messages in queue="${queue}"`);
-  sqs.purgeQueue(getQueueUrl(queue))
+  sqs.purgeQueue(queue)
     .then(() => {
       clearQueue(queue);
       log.info(`INFO: messages purged queue="${queue}"`);
@@ -38,7 +37,7 @@ export const clearMessages = queue => () => {
 // Delete a specific message from a queue
 export const deleteMessage = (queue, messageId) => () => {
   log.debug(`DEBUG: deleting message id="${messageId}"`);
-  sqs.deleteMessage(getQueueUrl(queue), messageId)
+  sqs.deleteMessage(queue, messageId)
     .then(() => {
       removeFromCache(queue, messageId);
       log.info(`INFO: message deleted id="${messageId}"`);

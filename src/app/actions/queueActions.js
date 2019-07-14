@@ -2,7 +2,6 @@ import log from 'electron-log';
 
 import { GET_QUEUES, GET_QUEUE, GET_MESSAGES } from './types';
 import { getQueueMessages } from '../cache/messageCache';
-import { getQueueUrl } from './common';
 import sqs from '../controllers/sqs';
 
 // List all available queues
@@ -38,8 +37,8 @@ export const createQueue = (name, history) => () => {
 };
 
 // Delete queue
-export const deleteQueue = (name, history) => () => {
-  sqs.deleteQueue(getQueueUrl(name))
+export const deleteQueue = (queue, history) => () => {
+  sqs.deleteQueue(queue)
     .then(() => {
       getQueues();
       history.push('/queues');
