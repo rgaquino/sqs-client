@@ -1,13 +1,15 @@
 import log from 'electron-log';
 
 import sqs from '../controllers/sqs';
-import { getConfig, setConfig } from '../controllers/config';
+import {
+  getConfig,
+  setConfig,
+  CONFIG_ACCESS_KEY_ID,
+  CONFIG_SECRET_ACCESS_KEY_ID,
+  CONFIG_REGION,
+  CONFIG_ENDPOINT,
+} from '../controllers/config';
 import { GET_CONN_CONFIG } from './types';
-
-const CONFIG_ACCESS_KEY_ID = 'accessKeyId';
-const CONFIG_SECRET_ACCESS_KEY_ID = 'secretAccessKey';
-const CONFIG_REGION = 'region';
-const CONFIG_ENDPOINT = 'endpoint';
 
 export const getConnectionConfig = () => (dispatch) => {
   log.debug('retrieving connection configuration...');
