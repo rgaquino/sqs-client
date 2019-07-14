@@ -32,7 +32,7 @@ export const createQueue = (name, history) => () => {
   sqs.createQueue(name)
     .then(() => {
       getQueues();
-      history.push('/');
+      history.push('/queues');
     })
     .catch(err => log.error(`failed to create queue, name=${history}, err=${err}`));
 };
@@ -42,7 +42,7 @@ export const deleteQueue = (name, history) => () => {
   sqs.deleteQueue(getQueueUrl(name))
     .then(() => {
       getQueues();
-      history.push('/');
+      history.push('/queues');
     })
     .catch(err => log.error(`failed to delete queue, ame=${history}, err=${err}`));
 };

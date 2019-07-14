@@ -33,7 +33,7 @@ class CreateQueue extends Component {
             <div className="col-md-12">
               <form onSubmit={this.onSubmit}>
                 <div className="d-flex justify-content-center">
-                  <Link to="/" className="btn"><h2>New Queue</h2></Link>
+                  <Link to="/queues" className="btn"><h2>New Queue</h2></Link>
                 </div>
                 <div className="form-group">
                   <label htmlFor="exampleInputEmail1">Queue Name</label>
@@ -48,7 +48,7 @@ class CreateQueue extends Component {
                   </small>
                 </div>
                 <input type="submit" value="Submit" className="btn btn-primary btn-block" />
-                <Link to="/" className="btn btn-secondary btn-block">Back</Link>
+                <Link to="/queues" className="btn btn-secondary btn-block">Back</Link>
               </form>
             </div>
           </div>
@@ -60,6 +60,7 @@ class CreateQueue extends Component {
 
 CreateQueue.propTypes = {
   createQueue: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default connect(null, { createQueue })(CreateQueue);

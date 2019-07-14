@@ -47,7 +47,7 @@ class QueueInfo extends Component {
           <div className="row">
             <div className="col-sm-12">
               <div className="d-flex justify-content-center">
-                <Link to="/" className="btn"><h2>Queue Information</h2></Link>
+                <Link to="/queues" className="btn"><h2>Queue Information</h2></Link>
               </div>
             </div>
           </div>
@@ -122,6 +122,7 @@ QueueInfo.propTypes = {
   getQueue: PropTypes.func.isRequired,
   clearMessages: PropTypes.func.isRequired,
   message: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({

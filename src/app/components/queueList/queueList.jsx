@@ -39,7 +39,7 @@ class QueueList extends Component {
           <div className="row">
             <div className="col-sm-12">
               <div className="d-flex justify-content-center">
-                <Link to="/" className="btn"><h1>SQS Client</h1></Link>
+                <Link to="/queues" className="btn"><h1>SQS Client</h1></Link>
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@ class QueueList extends Component {
               <Link to="/create" className="btn btn-primary btn-block">New Queue</Link>
             </div>
             <div className="col-sm-6">
-              <Link to="/config" className="btn btn-secondary btn-block">Configuration</Link>
+              <Link to="/" className="btn btn-secondary btn-block">Disconnect</Link>
             </div>
           </div>
           {/* Search and  Queue List */}

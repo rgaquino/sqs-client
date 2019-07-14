@@ -16,12 +16,13 @@ export const getConnectionConfig = () => (dispatch) => {
   });
 };
 
-export const setConnectionConfig = config => () => {
+export const setConnectionConfig = (config, history) => () => {
   log.debug('saving new connection configuration...');
   setConfig('accessKeyId', config.accessKeyId);
   setConfig('secretAccessKey', config.secretAccessKey);
   setConfig('region', config.region);
   setConfig('endpoint', config.endpoint);
   getConnectionConfig();
+  history.push('/queues');
   // TODO: Reload connection to use new configuration
 };
