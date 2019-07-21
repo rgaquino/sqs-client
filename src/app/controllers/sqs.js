@@ -17,15 +17,25 @@ sqs.initialize = function initialize(config) {
 
 sqs.listQueues = function listQueues(filter) {
   return new Promise((resolve, reject) => {
-    const params = {
-      QueueNamePrefix: filter,
-    };
-    sqs.client.listQueues(params, (err, data) => {
+    sqs.client.listQueues(null, (err, data) => {
       if (err) {
         reject(err);
       }
+
+      const queues = data.QueueUrls.map(q => q.substring(q.lastIndexOf('/') + 1));
+      let filteredQueues = [];
+      if (!filter || filter === '') {
+        filteredQueues = queues;
+      } else {
+        for (let i = 0; i < queues.length; i += 1) {
+          if (queues[i].toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
+            filteredQueues.push(queues[i]);
+          }
+        }
+      }
+
       resolve({
-        queues: data.QueueUrls,
+        queues: filteredQueues,
       });
     });
   });
