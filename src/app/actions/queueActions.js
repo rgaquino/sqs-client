@@ -8,13 +8,9 @@ import sqs from '../controllers/sqs';
 export const getQueues = filter => (dispatch) => {
   sqs.listQueues(filter)
     .then((res) => {
-      let queues = [];
-      if (res.queues) {
-        queues = res.queues.map(q => q.substring(q.lastIndexOf('/') + 1));
-      }
       dispatch({
         type: GET_QUEUES,
-        payload: queues,
+        payload: res.queues,
       });
     })
     .catch((err) => {
