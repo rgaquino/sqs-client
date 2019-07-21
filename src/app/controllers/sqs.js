@@ -22,7 +22,7 @@ sqs.listQueues = function listQueues(filter) {
         reject(err);
       }
 
-      const queues = data.QueueUrls.map(q => q.substring(q.lastIndexOf('/') + 1));
+      const queues = data.QueueUrls.map(q => q.substring(q.lastIndexOf('/') + 1)).sort();
       let filteredQueues = [];
       if (!filter || filter === '') {
         filteredQueues = queues;
