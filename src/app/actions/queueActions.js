@@ -1,7 +1,6 @@
 import log from 'electron-log';
 
-import { GET_QUEUES, GET_QUEUE, GET_MESSAGES } from './types';
-import { getQueueMessages } from '../cache/messageCache';
+import { GET_QUEUES, GET_QUEUE } from './types';
 import sqs from '../controllers/sqs';
 
 // List all available queues
@@ -46,9 +45,5 @@ export const getQueue = queue => (dispatch) => {
   dispatch({
     type: GET_QUEUE,
     payload: queue,
-  });
-  dispatch({
-    type: GET_MESSAGES,
-    payload: getQueueMessages(queue),
   });
 };

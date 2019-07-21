@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { deleteQueue, getQueue } from '../../actions/queueActions';
-import { clearMessages } from '../../actions/messageActions';
+import { getMessages, clearMessages } from '../../actions/messageActions';
 import SendMessage from './sendMessage';
-import MessageDetails from './messageDetails';
+import QueueMessages from './queueMessages';
 
 
 class QueueInfo extends Component {
@@ -14,6 +14,7 @@ class QueueInfo extends Component {
     super(props);
     this.state = {
       queue: props.match.params.name,
+      messages: [],
     };
     this.deleteQueue = this.deleteQueue.bind(this);
     this.clearMessages = this.clearMessages.bind(this);
@@ -21,6 +22,7 @@ class QueueInfo extends Component {
 
   componentWillMount() {
     this.props.getQueue(this.state.queue);
+    this.props.getMessages(this.state.queue);
   }
 
   deleteQueue() {
@@ -33,12 +35,6 @@ class QueueInfo extends Component {
 
   render() {
     const { messages } = this.props.message;
-    const messageList = Object.keys(messages)
-      .map(key => (
-        <div key={key} className="col-md-12">
-          <MessageDetails id={key} body={messages[key]} />
-        </div>
-      ));
 
     return (
       <Fragment>
@@ -102,9 +98,11 @@ class QueueInfo extends Component {
               <SendMessage queue={this.state.queue} />
             </div>
           </div>
-          {/* Message Box */}
+          {/* Message List */}
           <div className="row">
-            {messageList}
+            <div className="col-md-12">
+              <QueueMessages messages={messages} />
+            </div>
           </div>
         </div>
       </Fragment>
@@ -121,6 +119,7 @@ QueueInfo.propTypes = {
   deleteQueue: PropTypes.func.isRequired,
   getQueue: PropTypes.func.isRequired,
   clearMessages: PropTypes.func.isRequired,
+  getMessages: PropTypes.func.isRequired,
   message: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 };
@@ -129,4 +128,6 @@ const mapStateToProps = state => ({
   message: state.message,
 });
 
-export default connect(mapStateToProps, { deleteQueue, getQueue, clearMessages })(QueueInfo);
+const mapDispatchToProps = { deleteQueue, getQueue, getMessages, clearMessages };
+
+export default connect(mapStateToProps, mapDispatchToProps)(QueueInfo);
