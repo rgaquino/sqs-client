@@ -1,7 +1,7 @@
 import { GET_MESSAGES } from '../actions/types';
 
 const initialState = {
-  messages: [],
+  messages: {},
 };
 
 export default function (state = initialState, action) {

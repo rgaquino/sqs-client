@@ -7,6 +7,7 @@ import { deleteQueue, getQueue } from '../../actions/queueActions';
 import { getMessages, clearMessages } from '../../actions/messageActions';
 import SendMessage from './sendMessage';
 import QueueMessages from './queueMessages';
+import { getQueueCount } from '../../cache/messageCache';
 
 
 class QueueInfo extends Component {
@@ -70,7 +71,7 @@ class QueueInfo extends Component {
                       className="form-control"
                       name="queueName"
                       onChange={this.onChange}
-                      value="14"
+                      value={getQueueCount(this.state.queue)}
                       readOnly
                     />
                   </div>
@@ -99,11 +100,7 @@ class QueueInfo extends Component {
             </div>
           </div>
           {/* Message List */}
-          <div className="row">
-            <div className="col-md-12">
-              <QueueMessages messages={messages} />
-            </div>
-          </div>
+          <QueueMessages messages={messages} />
         </div>
       </Fragment>
     );

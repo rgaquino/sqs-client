@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import QueueListItem from './queueListItem';
 import { getQueues } from '../../actions/queueActions';
+import { getQueueCount } from '../../cache/messageCache';
 
 class QueueList extends Component {
   constructor(props) {
@@ -72,7 +73,7 @@ class QueueList extends Component {
             </div>
             <div className="col-md-12">
               <ul className="list-group">
-                {queues.map(q => <QueueListItem key={q} queue={q} />)}
+                {queues.map(q => <QueueListItem key={q} queue={q} count={getQueueCount(q)} />)}
               </ul>
             </div>
           </div>

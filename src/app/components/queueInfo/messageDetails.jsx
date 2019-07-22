@@ -18,19 +18,21 @@ class MessageDetails extends Component {
 
   render() {
     return (
-      <Fragment>
-        <div className="card">
-          <div className="card-header">
-            <span>Message ID: {this.props.id}</span>
-            <button className="btn-sm btn-danger float-right" onClick={this.deleteMessage}>
-              Delete
-            </button>
-          </div>
-          <div className="card-body">
-            <p className="card-text">{this.props.body}</p>
+      <div className="row">
+        <div className="col-md-12">
+          <div className="card">
+            <div className="card-header">
+              <span>Message ID: {this.props.id}</span>
+              <button className="btn-sm btn-danger float-right" onClick={this.deleteMessage}>
+                Delete
+              </button>
+            </div>
+            <div className="card-body">
+              <p className="card-text">{this.props.body}</p>
+            </div>
           </div>
         </div>
-      </Fragment>
+      </div>
     );
   }
 }

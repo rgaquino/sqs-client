@@ -20,3 +20,5 @@ export const clearQueue = (queue) => {
 };
 
 export const getQueueMessages = queue => (!messages[queue] ? {} : messages[queue]);
+
+export const getQueueCount = queue => (!messages[queue] ? 0 : Object.keys(messages[queue]).length);
