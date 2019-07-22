@@ -5,7 +5,7 @@ import MessageDetails from './messageDetails';
 class QueueMessages extends Component {
   render() {
     const messages = this.props.messages;
-    return Object.keys(messages)
+    return Object.keys(messages).reverse()
       .map(key => (
         <MessageDetails id={key} key={key} message={messages[key]} />
       ));
