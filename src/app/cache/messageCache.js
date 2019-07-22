@@ -1,5 +1,9 @@
 import log from 'electron-log';
 
+//  <queue_name>:
+//    <message_id>:
+//      body:
+//      message:
 const messages = {};
 
 export const addToCache = (queue, id, message) => {
