@@ -1,12 +1,11 @@
 import {
   GET_QUEUES,
   GET_QUEUE,
-  DELETE_QUEUE,
 } from '../actions/types';
 
 const initialState = {
-  queues: [],
-  queue: null,
+  queues: [],   // list of all queues
+  queue: null,  // current queue being viewed
 };
 
 export default function (state = initialState, action) {
@@ -21,9 +20,6 @@ export default function (state = initialState, action) {
         queue: action.payload,
         queues: state.queues,
       };
-    case DELETE_QUEUE:
-      // TODO: implement this
-      return state;
     default:
       return state;
   }
