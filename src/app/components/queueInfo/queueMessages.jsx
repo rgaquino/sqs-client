@@ -6,7 +6,9 @@ class QueueMessages extends Component {
   render() {
     const messages = this.props.messages;
     return Object.keys(messages)
-      .map(key => (<MessageDetails id={key} key={key} body={messages[key]} />));
+      .map(key => (
+        <MessageDetails id={key} key={key} message={messages[key]} />
+      ));
   }
 }
 

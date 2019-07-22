@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import log from 'electron-log';
@@ -18,18 +18,18 @@ class MessageDetails extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-md-12">
-          <div className="card">
-            <div className="card-header">
-              <span>Message ID: {this.props.id}</span>
-              <button className="btn-sm btn-danger float-right" onClick={this.deleteMessage}>
-                Delete
-              </button>
-            </div>
-            <div className="card-body">
-              <p className="card-text">{this.props.body}</p>
-            </div>
+      <div className="col-md-12">
+        <div className="card mb-3">
+          <div className="card-header">
+            <button className="btn-sm btn-danger float-right" onClick={this.deleteMessage}>
+              Delete
+            </button>
+            <span>Message ID: {this.props.id}</span>
+            <br />
+            <span>Sent on: {this.props.message.timestamp}</span>
+          </div>
+          <div className="card-body">
+            <p className="card-text">{this.props.message.body}</p>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@ class MessageDetails extends Component {
 
 MessageDetails.propTypes = {
   id: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
+  message: PropTypes.object.isRequired,
   deleteMessage: PropTypes.func.isRequired,
   queue: PropTypes.shape({
     queue: PropTypes.string,

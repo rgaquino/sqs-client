@@ -100,7 +100,9 @@ class QueueInfo extends Component {
             </div>
           </div>
           {/* Message List */}
-          <QueueMessages messages={messages} />
+          <div className="row">
+            <QueueMessages messages={messages} />
+          </div>
         </div>
       </Fragment>
     );

@@ -13,7 +13,7 @@ if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
 const createWindow = async () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 600,
+    width: 750,
     height: 800,
     webPreferences: {
       nodeIntegration: true,
