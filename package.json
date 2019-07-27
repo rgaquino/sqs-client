@@ -1,6 +1,6 @@
 {
   "name": "sqs-client",
-  "productName": "SQS Client",
+  "productName": "sqs-client",
   "version": "1.0.0",
   "description": "A local GUI for remote AWS SQS instances and Active MQ containers.",
   "main": "src/main.js",
