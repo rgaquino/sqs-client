@@ -2,3 +2,5 @@ node_modules
 out
 .eslintcache
 .idea
+.vscode
+.DS_Store
