@@ -1,8 +1,8 @@
 {
   "name": "sqs-client",
-  "productName": "sqs-client",
+  "productName": "SQS Client",
   "version": "1.0.0",
-  "description": "SQS Client",
+  "description": "A local GUI for remote AWS SQS instances and Active MQ containers.",
   "main": "src/main.js",
   "scripts": {
     "start": "electron-forge start",

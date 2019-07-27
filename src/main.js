@@ -15,7 +15,7 @@ if (isDevMode) enableLiveReload({ strategy: 'react-hmr' });
 const mainMenuTemplate = [
   // { role: 'appMenu' }
   ...(isMac ? [{
-    label: app.name,
+    label: app.productName,
     submenu: [
       { role: 'about' },
       { type: 'separator' },
