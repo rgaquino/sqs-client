@@ -17,7 +17,9 @@ addons:
     packages:
       - fakeroot
       - rpm
-  artifacts: true
+  artifacts: 
+    region:  "ap-southeast-1"
+    working_dir: out
 
 install:
   - npm install
