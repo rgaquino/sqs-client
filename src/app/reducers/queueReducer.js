@@ -4,8 +4,8 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  queues: [],   // list of all queues
-  queue: null,  // current queue being viewed
+  queues: [],
+  queue: null,
 };
 
 export default function (state = initialState, action) {
