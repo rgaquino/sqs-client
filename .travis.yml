@@ -17,6 +17,7 @@ addons:
     packages:
       - fakeroot
       - rpm
+  artifacts: true
 
 install:
   - npm install

@@ -38,8 +38,8 @@
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
       "github_repository": {
-        "owner": "",
-        "name": ""
+        "owner": "rgaquino",
+        "name": "sqs-client"
       },
       "windowsStoreConfig": {
         "packageName": "",
