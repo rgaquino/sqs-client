@@ -16,9 +16,7 @@ A local GUI to manage AWS SQS and Active MQ containers built using Electron and 
 
 ## Download
 
-- MacOS
-- Linux
-- Windows
+Latest artifacts can be downloaded here: https://github.com/rgaquino/sqs-client/releases
 
 ## Build
 
