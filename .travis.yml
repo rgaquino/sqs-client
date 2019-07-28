@@ -19,7 +19,8 @@ addons:
       - rpm
   artifacts: 
     region:  "ap-southeast-1"
-    working_dir: out
+    working_dir: artifacts
+    debug: true
 
 install:
   - npm install
