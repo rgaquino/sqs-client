@@ -17,17 +17,10 @@ addons:
     packages:
       - fakeroot
       - rpm
-  artifacts: 
-    region:  "ap-southeast-1"
-    working_dir: artifacts
-    debug: true
 
 install:
   - npm install
-#  - npm update
 
 script:
   - npm run lint
-#  - if test -z "$TRAVIS_TAG"; then npm run make; fi
-  - electron-forge make
-#after_success: if test -n "$TRAVIS_TAG"; then npm run publish; fi
+  - electron-forge publish
