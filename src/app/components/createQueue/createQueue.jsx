@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import { createQueue } from '../../actions/queueActions';
 
 class CreateQueue extends Component {
-
   constructor(props) {
     super(props);
     this.state = {

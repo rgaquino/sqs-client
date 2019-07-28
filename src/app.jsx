@@ -15,7 +15,6 @@ import Configuration from './app/components/configuration';
 const store = configureStore();
 
 class App extends Component {
-
   componentWillMount() {
     initConfig();
   }
