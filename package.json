@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.482.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "connected-react-router": "^6.4.0",
     "electron-compile": "^6.4.4",
